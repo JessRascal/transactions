@@ -7,9 +7,9 @@ const bankAccountSchema = new mongoose.Schema({
   user: Number, // reference
   createdDate: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
-  transactions: { type: mongoose.Schema.Types.ObjectId, ref: 'Transaction' }
+  transactions: { type: mongoose.Schema.Types.ObjectId, ref: 'Transaction' },
 });
 
 const BankAccount = mongoose.model('BankAccount', bankAccountSchema);

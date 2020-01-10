@@ -3,14 +3,14 @@ import mongoose from 'mongoose';
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
-    unique: true
+    unique: true,
   },
   password: String,
   firstName: String,
   lastName: String,
   registeredDate: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   bankAccounts: [{
     name: String,
@@ -18,10 +18,10 @@ const userSchema = new mongoose.Schema({
     balance: Number,
     createdDate: {
       type: Date,
-      default: Date.now
+      default: Date.now,
     },
-    transactions: { type: mongoose.Schema.Types.ObjectId, ref: 'Transaction' }
-  }]
+    transactions: { type: mongoose.Schema.Types.ObjectId, ref: 'Transaction' },
+  }],
 });
 
 // userSchema.statics.findByLogin = async function (login) {

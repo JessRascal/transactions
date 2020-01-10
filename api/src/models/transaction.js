@@ -6,8 +6,8 @@ const transactionSchema = new mongoose.Schema({
   processedDate: Date,
   createdDate: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 const Transaction = mongoose.model('Transaction', transactionSchema);

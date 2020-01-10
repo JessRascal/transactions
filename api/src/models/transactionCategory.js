@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const transactionCategorySchema = new mongoose.Schema({
-  name: String
+  name: String,
 });
 
 const TransactionCategory = mongoose.model('TransactionCategory', transactionCategorySchema);
