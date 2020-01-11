@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 
 const bankAccountTypeSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, unique: true },
   defaultDebit: Boolean,
 }, {
-  timestamp: true,
+  timestamps: true,
 });
 
 const BankAccountType = mongoose.model('BankAccountType', bankAccountTypeSchema);

@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const transactionCategorySchema = new mongoose.Schema({
   name: String,
 }, {
-  timestamp: true,
+  timestamps: true,
 });
 
 const TransactionCategory = mongoose.model('TransactionCategory', transactionCategorySchema);

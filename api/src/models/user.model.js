@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     transactions: { type: mongoose.Schema.Types.ObjectId, ref: 'Transaction' },
   }],
 }, {
-  timestamp: true,
+  timestamps: true,
 });
 
 // userSchema.statics.findByLogin = async function (login) {

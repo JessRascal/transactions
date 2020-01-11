@@ -4,7 +4,7 @@ const transactionSchema = new mongoose.Schema({
   amount: Number,
   category: { type: mongoose.Schema.Types.ObjectId, ref: 'TransactionCategory' },
 }, {
-  timestamp: true,
+  timestamps: true,
 });
 
 const Transaction = mongoose.model('Transaction', transactionSchema);
