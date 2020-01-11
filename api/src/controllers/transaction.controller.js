@@ -1,4 +1,4 @@
-import User from '../models/user.model';
+import Transaction from '../models/transaction.model';
 
 // create new transaction
 exports.create = (req, res) => {
