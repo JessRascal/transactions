@@ -8,6 +8,9 @@ router.get('/:id', (req, res) => {
   console.log(`Endpoint test. ID: ${req.id}`);
 });
 
+
+
+// BANK ACCOUNT ENDPOINTS
 // GET: /users/:id/bankaccounts/
 router.get('/:id/bankaccounts/', (req, res) => {
   // return all bank accounts for a user
