@@ -2,7 +2,13 @@ import User from '../models/user.model';
 
 // create new bank account for a user
 exports.create = (req, res) => {
-  res.json({ message: `Creating bank account for user ${req.params.id}` });
+  // try {
+  //   let user = new User(req.body);
+  //   let result = await user.save();
+  //   res.json(result);
+  // } catch (err) {
+  //   res.status(500).json({ message: `Unable to create user - ${err}` });
+  // }
 };
 
 // retrieve all bank accounts for a user

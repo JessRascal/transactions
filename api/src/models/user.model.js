@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     accountType: { type: mongoose.Schema.Types.ObjectId, ref: 'BankAccountType' },
     balance: Number,
     // createdDate: { type: Date, default: Date.now, }, // TODO: remove if timestamp added to embedded
-    transactions: { type: mongoose.Schema.Types.ObjectId, ref: 'Transaction' },
+    transactions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Transaction' }],
   }],
 }, {
   timestamps: true,

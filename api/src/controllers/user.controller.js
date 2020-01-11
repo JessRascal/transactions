@@ -2,7 +2,6 @@ import User from '../models/user.model';
 
 // create new user
 exports.create = async (req, res) => {
-  // res.json({ message: `Creating user` });
   try {
     let user = new User(req.body);
     let result = await user.save();

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import users from '../controllers/user.controller';
-import bankAccounts from '../controllers/bankAccounts.controller';
+import bankAccounts from '../controllers/bankAccount.controller';
 
 const router = Router();
 
