@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import users from '../controllers/user.controller';
+import bankAccounts from '../controllers/bankAccounts.controller';
 
 const router = Router();
 
@@ -18,16 +19,19 @@ router.delete('/:id', users.delete);
 
 // bank account endpoints
 // POST /users/bankaccounts/
-router.post('/bankaccounts', bankAccounts.create);
+router.post('/:id/bankaccounts', bankAccounts.create);
+
+// GET /users/bankaccounts/
+router.get('/:id/bankaccounts', bankAccounts.findAll);
 
 // GET /users/bankaccounts/:id
-router.get('/bankaccounts/:id', bankAccounts.findOne);
+router.get('/:id/bankaccounts/:accountId', bankAccounts.findOne);
 
 // PUT /users/bankaccounts/:id
-router.put('/bankaccounts/:id', bankAccounts.update); // TODO: change to PATCH
+router.put('/:id/bankaccounts/:accountId', bankAccounts.update); // TODO: change to PATCH
 
 // DELETE /users/bankaccounts/:id
-router.delete('/bankaccounts/:id', bankAccounts.delete);
+router.delete('/:id/bankaccounts/:accountId', bankAccounts.delete);
 
 
 
