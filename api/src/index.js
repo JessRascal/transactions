@@ -13,9 +13,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // routes
-app.use('/ping', routes.ping);
+app.use('/', routes);
 
 // connect to db then start app
 connectDb().then(async () => {
-  app.listen(process.env.PORT, () => console.log(`API listening on port ${process.env.PORT}`));
+  app.listen(process.env.PORT || 3001, () => console.log(`API listening on port ${process.env.PORT}`));
 });
