@@ -1,25 +1,16 @@
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    unique: true,
-  },
+  email: { type: String, unique: true, },
   password: String,
   firstName: String,
   lastName: String,
-  registeredDate: {
-    type: Date,
-    default: Date.now,
-  },
+  registeredDate: { type: Date, default: Date.now, },
   bankAccounts: [{
     name: String,
     accountType: { type: mongoose.Schema.Types.ObjectId, ref: 'BankAccountType' },
     balance: Number,
-    createdDate: {
-      type: Date,
-      default: Date.now,
-    },
+    createdDate: { type: Date, default: Date.now, },
     transactions: { type: mongoose.Schema.Types.ObjectId, ref: 'Transaction' },
   }],
 });

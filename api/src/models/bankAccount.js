@@ -5,10 +5,7 @@ const bankAccountSchema = new mongoose.Schema({
   typeId: Number, // reference
   balance: Number,
   user: Number, // reference
-  createdDate: {
-    type: Date,
-    default: Date.now,
-  },
+  createdDate: { type: Date, default: Date.now, },
   transactions: { type: mongoose.Schema.Types.ObjectId, ref: 'Transaction' },
 });
 
