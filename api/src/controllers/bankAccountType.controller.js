@@ -6,7 +6,7 @@ exports.create = async (req, res) => {
   try {
     let type = new Type(req.body);
     let result = await type.save();
-    res.json(result);
+    res.status(201).json(result);
   } catch (err) {
     res.status(500).json({ message: `Unable to create bank account type - ${err}` });
   }

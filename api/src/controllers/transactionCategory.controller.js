@@ -5,7 +5,7 @@ exports.create = async (req, res) => {
   try {
     let category = new Category(req.body);
     let result = await category.save();
-    res.json(result);
+    res.status(201).json(result);
   } catch (err) {
     res.status(500).json({ message: `Unable to create transaction category - ${err}` });
   }
