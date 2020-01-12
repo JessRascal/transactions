@@ -14,7 +14,7 @@ router.post('/', users.findUser, bankAccounts.create);
 router.get('/', bankAccounts.findAll);
 
 // GET /users/:userId/bankaccounts/:accountId/
-router.get('/:accountId', bankAccounts.findOne);
+router.get('/:accountId', users.findUser, bankAccounts.findOne);
 
 // PUT /users/:userId/bankaccounts/:accountId/
 router.put('/:accountId', bankAccounts.update); // TODO: change to PATCH

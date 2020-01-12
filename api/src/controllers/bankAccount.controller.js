@@ -25,13 +25,7 @@ exports.findAll = async (req, res) => {
 // retrieve a single bank account for a user
 exports.findOne = async (req, res) => {
   try {
-    const result = User.findById(req.params.userId, (err, user) => {
-      return user.bankAccounts.id(req.params.accountId);
-      // console.log(`account inside: ${account}`); // TODO: REMOVE
-      // return account;
-    });
-    // console.log(`account: ${JSON.stringify(result)}`); // TODO: REMOVE
-    console.log(`account:`); // TODO: REMOVE
+    const result = req.user.bankAccounts.id(req.params.accountId);
     res.json(result);
   } catch (err) {
     res.status(500).json({ message: `Unable to find user's bank account`, error: err });
