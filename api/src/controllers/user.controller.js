@@ -4,8 +4,8 @@ import User from '../models/user.model';
 exports.create = async (req, res) => {
   try {
     let user = new User(req.body);
-    let result = await user.save();
-    res.status(201).json(result);
+    let userNew = await user.save();
+    res.status(201).json(userNew);
   } catch (err) {
     res.status(500).json({ message: `Unable to create user - ${err}` });
   }
@@ -31,7 +31,7 @@ exports.findUser = async (req, res, next) => {
   try {
     user = await User.findById(req.params.userId, '-password');
     if (user == null) {
-      return res.status(404).json({ message: `Cannot find user ${req.params.userId}` });
+      return res.status(404).json({ message: `User does not exist` });
     }
   } catch (err) {
     return res.status(500).json({ message: `Cannot find user`, error: err });

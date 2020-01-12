@@ -5,39 +5,42 @@ exports.create = async (req, res) => {
   try {
     const user = req.user;
     user.bankAccounts.push(req.body);
-    const result = await user.save();
-    res.status(201).json(result);
+    const userNew = await user.save();
+    res.status(201).json(userNew);
   } catch (err) {
-    res.status(500).json({ message: `Unable to create user`, error: err });
+    res.status(500).json({ message: `Unable to create account`, error: err });
   }
 };
 
 // retrieve all bank accounts for a user
 exports.findAll = async (req, res) => {
   try {
-    const result = await User.findById(req.params.userId, 'bankAccounts');
-    res.json(result);
+    const accounts = await User.findById(req.params.userId, 'bankAccounts');
+    res.json(accounts);
   } catch (err) {
-    res.status(500).json({ message: `Unable to find user's bank accounts`, error: err });
+    res.status(500).json({ message: `Unable to find user's accounts`, error: err });
   }
 };
 
 // retrieve a single bank account for a user
 exports.findOne = async (req, res) => {
   try {
-    const result = req.user.bankAccounts.id(req.params.accountId);
-    res.json(result);
+    const account = req.user.bankAccounts.id(req.params.accountId);
+    if (account == null) {
+      return res.status(404).json({ message: `Account does not exist` });
+    }
+    res.json(account);
   } catch (err) {
-    res.status(500).json({ message: `Unable to find user's bank account`, error: err });
+    res.status(500).json({ message: `Unable to find user's account`, error: err });
   }
 };
 
 // update a bank account for a user
 exports.update = (req, res) => {
-  res.json({ message: `Updating bank account ${req.params.accountId} for user ${req.params.userId}` });
+  res.json({ message: `Updating account ${req.params.accountId} for user ${req.params.userId}` });
 };
 
 // delete a bank account for a user
 exports.delete = (req, res) => {
-  res.json({ message: `Deleting bank account ${req.params.accountId} for user ${req.params.userId}` });
+  res.json({ message: `Deleting account ${req.params.accountId} for user ${req.params.userId}` });
 };

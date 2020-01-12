@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
 const transactionSchema = new mongoose.Schema({
-  amount: Number,
-  category: { type: mongoose.Schema.Types.ObjectId, ref: 'TransactionCategory' },
+  amount: { type: Number, required: true },
+  category: { type: mongoose.Schema.Types.ObjectId, ref: 'TransactionCategory', required: true },
 }, {
   timestamps: true,
 });
