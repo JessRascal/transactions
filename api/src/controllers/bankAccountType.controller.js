@@ -14,7 +14,6 @@ exports.create = async (req, res) => {
 
 // retrieve all account types
 exports.findAll = async (req, res) => {
-  // res.json({ message: `Getting all bank account types` });
   try {
     const types = await Type.find();
     res.json(types);
@@ -24,8 +23,16 @@ exports.findAll = async (req, res) => {
 };
 
 // retrieve a single account type
-exports.findOne = (req, res) => {
-  res.json({ message: `Getting bank account type ${req.params.id}` });
+exports.findOne = async (req, res) => {
+  try {
+    const type = await Type.findById(req.params.id);
+    if (type == null) {
+      return res.status(404).json({ message: `Account type does not exist` });
+    }
+    res.json(type);
+  } catch (err) {
+    return res.status(500).json({ message: `Cannot find account type`, error: err });
+  }
 };
 
 // update a account type

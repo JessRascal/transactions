@@ -12,13 +12,26 @@ exports.create = async (req, res) => {
 };
 
 // retrieve all transaction categories
-exports.findAll = (req, res) => {
-  res.json({ message: `Getting all transaction categories` });
+exports.findAll = async (req, res) => {
+  try {
+    const categories = await Category.find();
+    res.json(categories);
+  } catch {
+    res.status(500).json({ message: `Unable to find transaction categories`, error: err });
+  }
 };
 
 // retrieve a single transaction category
-exports.findOne = (req, res) => {
-  res.json({ message: `Getting transaction category ${req.params.id}` });
+exports.findOne = async (req, res) => {
+  try {
+    const category = await Category.findById(req.params.id);
+    if (category == null) {
+      return res.status(404).json({ message: `Transaction category does not exist` });
+    }
+    res.json(category);
+  } catch (err) {
+    return res.status(500).json({ message: `Cannot find transaction category`, error: err });
+  }
 };
 
 // update a transaction category
