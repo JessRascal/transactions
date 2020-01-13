@@ -46,9 +46,15 @@ exports.update = (req, res) => {
 exports.delete = async (req, res) => {
   try {
     const user = req.user;
-    const updatedUser = await user.update({ cn: bankAccounts }, { $pullAll: { _id: req.params.accountId } });
-    res.status(201).json(updatedUser);
+    const result = await user.updateOne({
+      $pull: {
+        bankAccounts: {
+          _id: req.params.accountId
+        }
+      }
+    });
     // TODO: what if account doesn't exist in array?
+    res.status(201).json({ message: "Account successfully deleted" });
   } catch (err) {
     res.status(500).json({ message: `Unable to delete account`, error: err });
   }
