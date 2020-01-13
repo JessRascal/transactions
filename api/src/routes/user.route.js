@@ -6,6 +6,9 @@ const router = Router();
 // POST /users/
 router.post('/', users.create);
 
+// GET /bankaccounttypes/
+router.get('/', users.findAll);
+
 // DELETE /users/:id
 router.delete('/:userId', users.delete);
 

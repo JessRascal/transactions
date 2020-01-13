@@ -7,7 +7,7 @@ exports.create = async (req, res) => {
     let result = await category.save();
     res.status(201).json(result);
   } catch (err) {
-    res.status(500).json({ message: `Unable to create transaction category`, error: err });
+    res.status(500).json({ message: `Unable to create category`, error: err });
   }
 };
 
@@ -17,7 +17,7 @@ exports.findAll = async (req, res) => {
     const categories = await Category.find();
     res.json(categories);
   } catch {
-    res.status(500).json({ message: `Unable to find transaction categories`, error: err });
+    res.status(500).json({ message: `Unable to find categories`, error: err });
   }
 };
 
@@ -26,20 +26,28 @@ exports.findOne = async (req, res) => {
   try {
     const category = await Category.findById(req.params.id);
     if (category == null) {
-      return res.status(404).json({ message: `Transaction category does not exist` });
+      return res.status(404).json({ message: `Category does not exist` });
     }
     res.json(category);
   } catch (err) {
-    return res.status(500).json({ message: `Cannot find transaction category`, error: err });
+    return res.status(500).json({ message: `Cannot find category`, error: err });
   }
 };
 
 // update a transaction category
 exports.update = (req, res) => {
-  res.json({ message: `Updating transaction category ${req.params.id}` });
+  res.json({ message: `Updating category ${req.params.id}` });
 };
 
 // delete a transation category
-exports.delete = (req, res) => {
-  res.json({ message: `Deleting transaction category ${req.params.id}` });
+exports.delete = async (req, res) => {
+  try {
+    const category = await Category.findByIdAndDelete(req.params.id);
+    if (category == null) {
+      return res.status(404).json({ message: `Unable to delete, could not find the category` });
+    }
+    res.json({ message: `Category successfully deleted` });
+  } catch (err) {
+    return res.status(500).json({ message: `Cannot delete category`, error: err });
+  }
 };

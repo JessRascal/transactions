@@ -35,12 +35,20 @@ exports.findOne = async (req, res) => {
   }
 };
 
-// update a account type
+// update an account type
 exports.update = (req, res) => {
   res.json({ message: `Updating bank account type ${req.params.id}` });
 };
 
-// delete a account type
-exports.delete = (req, res) => {
-  res.json({ message: `Deleting bank account type ${req.params.id}` });
+// delete an account type
+exports.delete = async (req, res) => {
+  try {
+    const type = await Type.findByIdAndDelete(req.params.id);
+    if (type == null) {
+      return res.status(404).json({ message: `Unable to delete, could not find the account type` });
+    }
+    res.json({ message: `Account type successfully deleted` });
+  } catch (err) {
+    return res.status(500).json({ message: `Cannot delete account type`, error: err });
+  }
 };

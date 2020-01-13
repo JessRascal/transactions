@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   bankAccounts: [{
-    name: { type: String, required: true, unique: true },
+    name: { type: String, required: true }, // TODO: setting as unique stops being able to create multiple users without accounts
     accountType: { type: mongoose.Schema.Types.ObjectId, ref: 'BankAccountType', required: true },
     balance: { type: Number, default: 0.00 },
     transactions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Transaction' }],

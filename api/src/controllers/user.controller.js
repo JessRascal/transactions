@@ -11,6 +11,16 @@ exports.create = async (req, res) => {
   }
 };
 
+// retrieve all account types
+exports.findAll = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch {
+    res.status(500).json({ message: `Unable to find users`, error: err });
+  }
+};
+
 // retrieve a single user
 exports.findOne = (req, res) => {
   res.json(req.user);
@@ -22,8 +32,16 @@ exports.update = (req, res) => {
 };
 
 // delete a user
-exports.delete = (req, res) => {
-  res.json({ message: `Deleting user ${req.params.userId}` });
+exports.delete = async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.userId);
+    if (user == null) {
+      return res.status(404).json({ message: `Unable to delete, could not find the user` });
+    }
+    res.json({ message: `User successfully deleted` });
+  } catch (err) {
+    return res.status(500).json({ message: `Cannot delete user`, error: err });
+  }
 };
 
 exports.findUser = async (req, res, next) => {
