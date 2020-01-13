@@ -4,9 +4,6 @@ import bankAccounts from '../controllers/bankAccount.controller';
 
 const router = Router({ mergeParams: true });
 
-// GET /users/:userId/bankaccounts/
-router.get('/', bankAccounts.findAll);
-
 // PUT /users/:userId/bankaccounts/:accountId/
 router.put('/:accountId', bankAccounts.update); // TODO: change to PATCH
 
@@ -18,6 +15,9 @@ router.use('/', users.findUser)
 
 // POST /users/:userId/bankaccounts/
 router.post('/', bankAccounts.create);
+
+// GET /users/:userId/bankaccounts/
+router.get('/', bankAccounts.findAll);
 
 // GET /users/:userId/bankaccounts/:accountId/
 router.get('/:accountId', bankAccounts.findOne);
