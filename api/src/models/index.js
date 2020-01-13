@@ -9,6 +9,8 @@ const connectDb = async () => {
         useUnifiedTopology: true,
         useCreateIndex: true,
       });
+    // listen for errors
+    mongoose.connection.on('error', console.error);
     console.log(`Connected to the database`);
   }
   catch (e) {

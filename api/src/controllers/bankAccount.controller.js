@@ -2,6 +2,7 @@ import User from '../models/user.model';
 
 // create new bank account for a user
 exports.create = async (req, res) => {
+  // TODO: just patch in the bank account instead of re-saving the full user object?
   try {
     const user = req.user;
     user.bankAccounts.push(req.body);

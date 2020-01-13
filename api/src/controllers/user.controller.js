@@ -7,7 +7,7 @@ exports.create = async (req, res) => {
     let userNew = await user.save();
     res.status(201).json(userNew);
   } catch (err) {
-    res.status(500).json({ message: `Unable to create user - ${err}` });
+    res.status(500).json({ message: `Unable to create user`, error: err });
   }
 };
 
