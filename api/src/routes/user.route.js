@@ -6,13 +6,16 @@ const router = Router();
 // POST /users/
 router.post('/', users.create);
 
+// DELETE /users/:id
+router.delete('/:userId', users.delete);
+
+// MIDDLEWARE: get user details
+router.use('/:userId', users.findUser)
+
 // GET /users/:id
-router.get('/:userId', users.findUser, users.findOne);
+router.get('/:userId', users.findOne);
 
 // PUT /users/:id
-router.put('/:UserId', users.findUser, users.update); // TODO: change to PATCH
-
-// DELETE /users/:id
-router.delete('/:userId', users.findUser, users.delete);
+router.put('/:userId', users.update); // TODO: change to PATCH
 
 export default router;

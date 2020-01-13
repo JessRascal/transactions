@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const transactionCategorySchema = new mongoose.Schema({
-  name: { type: String, unique: true, required: true },
+  name: { type: String, required: true, index: { unique: true } },
 }, {
   timestamps: true,
 });
