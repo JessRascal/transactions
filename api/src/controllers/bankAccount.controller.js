@@ -34,10 +34,11 @@ exports.findOne = (req, res) => {
 // update a bank account for a user
 exports.update = async (req, res) => {
   try {
-    const accountUpdated = await User.findByIdAndUpdate(req.params.userId, req.body, { new: true });
+    const accountUpdated = req.user.bankAccounts.id(req.params.accountId);
     if (!accountUpdated) {
       return res.status(404).json({ message: `Could not update account type, it does not exist` });
     }
+    accountUpdated.update(req.body);
     res.status(200).json(accountUpdated);
   } catch (err) {
     res.status(500).json({ message: `Unable to update account type`, error: err });
@@ -51,14 +52,8 @@ exports.delete = async (req, res) => {
     if (user.bankAccounts.id(req.params.accountId) == null) {
       return res.status(404).json({ message: `Unable to delete, could not find the account` });
     }
-    // remove from array
-    const result = await user.updateOne({
-      $pull: {
-        bankAccounts: {
-          _id: req.params.accountId
-        }
-      }
-    });
+    user.bankAccounts.id(req.params.accountId).remove();
+    user.save();
     res.json({ message: "Account successfully deleted" });
   } catch (err) {
     res.status(500).json({ message: `Unable to delete account`, error: err });

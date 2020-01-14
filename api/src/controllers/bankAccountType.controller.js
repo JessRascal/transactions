@@ -38,7 +38,7 @@ exports.findOne = async (req, res) => {
 // update an account type
 exports.update = async (req, res) => {
   try {
-    const typeUpdated = await User.findByIdAndUpdate(req.params.userId, req.body, { new: true });
+    const typeUpdated = await Type.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!typeUpdated) {
       return res.status(404).json({ message: `Could not update account type, it does not exist` });
     }

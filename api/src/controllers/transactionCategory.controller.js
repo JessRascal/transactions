@@ -37,7 +37,7 @@ exports.findOne = async (req, res) => {
 // update a transaction category
 exports.update = async (req, res) => {
   try {
-    const categoryUpdated = await User.findByIdAndUpdate(req.params.userId, req.body, { new: true });
+    const categoryUpdated = await Category.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!categoryUpdated) {
       return res.status(404).json({ message: `Could not update category, it does not exist` });
     }
