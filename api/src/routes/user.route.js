@@ -9,16 +9,13 @@ router.post('/', users.create);
 // GET /bankaccounttypes/
 router.get('/', users.findAll);
 
+// GET /users/:id
+router.get('/:userId', users.findUser, users.findOne);
+
+// PATCH /users/:id
+router.patch('/:userId', users.update);
+
 // DELETE /users/:id
 router.delete('/:userId', users.delete);
-
-// MIDDLEWARE: get user details
-router.use('/:userId', users.findUser)
-
-// GET /users/:id
-router.get('/:userId', users.findOne);
-
-// PUT /users/:id
-router.put('/:userId', users.update); // TODO: change to PATCH
 
 export default router;

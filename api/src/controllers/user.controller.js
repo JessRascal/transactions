@@ -3,8 +3,8 @@ import User from '../models/user.model';
 // create new user
 exports.create = async (req, res) => {
   try {
-    let user = new User(req.body);
-    let userNew = await user.save();
+    const user = new User(req.body);
+    const userNew = await user.save();
     res.status(201).json(userNew);
   } catch (err) {
     res.status(500).json({ message: `Unable to create user`, error: err });
@@ -27,8 +27,13 @@ exports.findOne = (req, res) => {
 };
 
 // update a user
-exports.update = (req, res) => {
-  res.json({ message: `Updating user ${req.params.userId}` });
+exports.update = async (req, res) => {
+  try {
+    const userUpdated = await User.findByIdAndUpdate(req.params.userId, req.body, { new: true });
+    res.status(200).json(userUpdated);
+  } catch (err) {
+    res.status(500).json({ message: `Unable to update user`, error: err });
+  }
 };
 
 // delete a user

@@ -8,6 +8,7 @@ const connectDb = async () => {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
+        useFindAndModify: false,
       });
     // listen for errors
     mongoose.connection.on('error', console.error);
