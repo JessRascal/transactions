@@ -46,6 +46,10 @@ exports.update = (req, res) => {
 exports.delete = async (req, res) => {
   try {
     const user = req.user;
+    if (user.bankAccounts.id(req.params.accountId) == null) {
+      return res.status(404).json({ message: `Unable to delete, could not find the account` });
+    }
+    // remove from array
     const result = await user.updateOne({
       $pull: {
         bankAccounts: {
@@ -53,8 +57,7 @@ exports.delete = async (req, res) => {
         }
       }
     });
-    // TODO: what if account doesn't exist in array?
-    res.status(201).json({ message: "Account successfully deleted" });
+    res.json({ message: "Account successfully deleted" });
   } catch (err) {
     res.status(500).json({ message: `Unable to delete account`, error: err });
   }
