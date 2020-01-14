@@ -4,12 +4,10 @@ import User from '../models/user.model';
 exports.create = async (req, res) => {
   // TODO: just patch in the bank account instead of re-saving the full user object?
   try {
-    // TODO: Bug - validation error always thrown when saving a new account type
-    console.log(`body: ${JSON.stringify(req.body)}`); // TODO: REMOVE
     const user = req.user;
     user.bankAccounts.push(req.body);
-    const updatedUser = await user.save();
-    res.status(201).json(updatedUser);
+    const userUpdated = await user.save();
+    res.status(201).json(userUpdated);
   } catch (err) {
     res.status(500).json({ message: `Unable to create account`, error: err });
   }
