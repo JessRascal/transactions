@@ -12,8 +12,8 @@ router.get('/', types.findAll);
 // GET /bankaccounttypes/:id
 router.get('/:id', types.findOne);
 
-// PUT /bankaccounttypes/:id
-router.put('/:id', types.update); // TODO: change to PATCH
+// PATCH /bankaccounttypes/:id
+router.patch('/:id', types.update);
 
 // DELETE /bankaccounttypes/:id
 router.delete('/:id', types.delete);

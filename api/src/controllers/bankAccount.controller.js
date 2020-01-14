@@ -23,21 +23,25 @@ exports.findAll = async (req, res) => {
 };
 
 // retrieve a single bank account for a user
-exports.findOne = async (req, res) => {
-  try {
-    const account = req.user.bankAccounts.id(req.params.accountId);
-    if (account == null) {
-      return res.status(404).json({ message: `Account does not exist` });
-    }
-    res.json(account);
-  } catch (err) {
-    res.status(500).json({ message: `Unable to find user's account`, error: err });
+exports.findOne = (req, res) => {
+  const account = req.user.bankAccounts.id(req.params.accountId);
+  if (account == null) {
+    return res.status(404).json({ message: `Account does not exist` });
   }
+  res.json(account);
 };
 
 // update a bank account for a user
-exports.update = (req, res) => {
-  res.json({ message: `Updating account ${req.params.accountId} for user ${req.params.userId}` });
+exports.update = async (req, res) => {
+  try {
+    const accountUpdated = await User.findByIdAndUpdate(req.params.userId, req.body, { new: true });
+    if (!accountUpdated) {
+      return res.status(404).json({ message: `Could not update account type, it does not exist` });
+    }
+    res.status(200).json(accountUpdated);
+  } catch (err) {
+    res.status(500).json({ message: `Unable to update account type`, error: err });
+  }
 };
 
 // delete a bank account for a user

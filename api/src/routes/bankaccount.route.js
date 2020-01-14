@@ -4,8 +4,8 @@ import bankAccounts from '../controllers/bankAccount.controller';
 
 const router = Router({ mergeParams: true });
 
-// PUT /users/:userId/bankaccounts/:accountId/
-router.put('/:accountId', bankAccounts.update); // TODO: change to PATCH
+// PATCH /users/:userId/bankaccounts/:accountId/
+router.patch('/:accountId', bankAccounts.update);
 
 // DELETE /users/:userId/bankaccounts/:accountId/
 router.delete('/:accountId', bankAccounts.delete);

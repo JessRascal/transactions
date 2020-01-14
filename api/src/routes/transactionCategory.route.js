@@ -12,8 +12,8 @@ router.get('/', categories.findAll);
 // GET /transactioncategories/:id
 router.get('/:id', categories.findOne);
 
-// PUT /transactioncategories/:id
-router.put('/:id', categories.update); // TODO: change to PATCH
+// PATCH /transactioncategories/:id
+router.patch('/:id', categories.update);
 
 // DELETE /transactioncategories/:id
 router.delete('/:id', categories.delete);

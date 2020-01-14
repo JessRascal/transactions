@@ -35,8 +35,16 @@ exports.findOne = async (req, res) => {
 };
 
 // update a transaction category
-exports.update = (req, res) => {
-  res.json({ message: `Updating category ${req.params.id}` });
+exports.update = async (req, res) => {
+  try {
+    const categoryUpdated = await User.findByIdAndUpdate(req.params.userId, req.body, { new: true });
+    if (!categoryUpdated) {
+      return res.status(404).json({ message: `Could not update category, it does not exist` });
+    }
+    res.status(200).json(categoryUpdated);
+  } catch (err) {
+    res.status(500).json({ message: `Unable to update category`, error: err });
+  }
 };
 
 // delete a transation category
