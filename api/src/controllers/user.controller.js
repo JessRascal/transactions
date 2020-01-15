@@ -11,10 +11,13 @@ exports.create = async (req, res) => {
   }
 };
 
-// retrieve all account types
+// retrieve all users
 exports.findAll = async (req, res) => {
   try {
     const users = await User.find();
+    if (!users) {
+      return res.status(404).json({ message: `No users exist in the system` });
+    }
     res.json(users);
   } catch {
     res.status(500).json({ message: `Unable to find users`, error: err });
@@ -31,7 +34,7 @@ exports.update = async (req, res) => {
   try {
     const userUpdated = await User.findByIdAndUpdate(req.params.userId, req.body, { new: true });
     if (!userUpdated) {
-      return res.status(404).json({ message: `Could not update user, they do not exist` });
+      return res.status(404).json({ message: `Unable to update user, they do not exist` });
     }
     res.status(200).json(userUpdated);
   } catch (err) {
@@ -43,25 +46,11 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.userId);
-    if (user == null) {
-      return res.status(404).json({ message: `Unable to delete, could not find the user` });
+    if (!user) {
+      return res.status(404).json({ message: `Unable to delete user, they do not exist` });
     }
     res.json({ message: `User successfully deleted` });
   } catch (err) {
-    return res.status(500).json({ message: `Cannot delete user`, error: err });
+    return res.status(500).json({ message: `Unable to delete user`, error: err });
   }
 };
-
-exports.findUser = async (req, res, next) => {
-  let user;
-  try {
-    user = await User.findById(req.params.userId, '-password');
-    if (user == null) {
-      return res.status(404).json({ message: `User does not exist` });
-    }
-  } catch (err) {
-    return res.status(500).json({ message: `Cannot find user`, error: err });
-  }
-  req.user = user;
-  next();
-}

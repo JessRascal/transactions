@@ -10,7 +10,7 @@ const bankAccountSchema = new mongoose.Schema({
 
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true, uniqueCaseInsensitive: true },
-  password: { type: String, required: true },
+  password: { type: String, required: true, select: false },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   bankAccounts: [bankAccountSchema],

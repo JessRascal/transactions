@@ -1,11 +1,12 @@
 import { Router } from 'express';
 import users from '../controllers/user.controller';
 import bankAccounts from '../controllers/bankAccount.controller';
+import findUser from '../middleware/findUser.middleware';
 
 const router = Router({ mergeParams: true });
 
 // MIDDLEWARE: get user details
-router.use('/', users.findUser);
+router.use('/', findUser);
 
 // POST /users/:userId/bankaccounts/
 router.post('/', bankAccounts.create);

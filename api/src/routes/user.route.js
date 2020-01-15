@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import users from '../controllers/user.controller';
+import findUser from '../middleware/findUser.middleware';
 
 const router = Router();
 
@@ -10,7 +11,7 @@ router.post('/', users.create);
 router.get('/', users.findAll);
 
 // GET /users/:id
-router.get('/:userId', users.findUser, users.findOne);
+router.get('/:userId', findUser, users.findOne);
 
 // PATCH /users/:id
 router.patch('/:userId', users.update);
