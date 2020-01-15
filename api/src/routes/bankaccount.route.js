@@ -5,11 +5,11 @@ import findUser from '../middleware/findUser.middleware';
 
 const router = Router({ mergeParams: true });
 
-// MIDDLEWARE: get user details
-router.use('/', findUser);
-
 // POST /users/:userId/bankaccounts/
 router.post('/', bankAccounts.create);
+
+// MIDDLEWARE: get user details
+router.use('/', findUser);
 
 // GET /users/:userId/bankaccounts/
 router.get('/', bankAccounts.findAll);

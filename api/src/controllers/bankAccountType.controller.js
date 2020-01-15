@@ -55,7 +55,7 @@ exports.delete = async (req, res) => {
     if (type == null) {
       return res.status(404).json({ message: `Unable to delete, could not find the account type` });
     }
-    res.json({ message: `Account type successfully deleted` });
+    res.send();
   } catch (err) {
     return res.status(500).json({ message: `Cannot delete account type`, error: err });
   }

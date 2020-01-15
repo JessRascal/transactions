@@ -7,7 +7,7 @@ exports.create = async (req, res) => {
     const userNew = await user.save();
     res.status(201).json(userNew);
   } catch (err) {
-    res.status(500).json({ message: `Unable to create user`, error: err });
+    res.status(500).json(err);
   }
 };
 
@@ -20,7 +20,7 @@ exports.findAll = async (req, res) => {
     }
     res.json(users);
   } catch {
-    res.status(500).json({ message: `Unable to find users`, error: err });
+    res.status(500).json(err);
   }
 };
 
@@ -38,7 +38,7 @@ exports.update = async (req, res) => {
     }
     res.status(200).json(userUpdated);
   } catch (err) {
-    res.status(500).json({ message: `Unable to update user`, error: err });
+    res.status(500).json(err);
   }
 };
 
@@ -49,8 +49,8 @@ exports.delete = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: `Unable to delete user, they do not exist` });
     }
-    res.json({ message: `User successfully deleted` });
+    res.send();
   } catch (err) {
-    return res.status(500).json({ message: `Unable to delete user`, error: err });
+    return res.status(500).json(err);
   }
 };

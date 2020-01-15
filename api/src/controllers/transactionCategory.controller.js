@@ -54,7 +54,7 @@ exports.delete = async (req, res) => {
     if (category == null) {
       return res.status(404).json({ message: `Unable to delete, could not find the category` });
     }
-    res.json({ message: `Category successfully deleted` });
+    res.send();
   } catch (err) {
     return res.status(500).json({ message: `Cannot delete category`, error: err });
   }
