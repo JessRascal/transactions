@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import users from '../controllers/user.controller';
-import findUser from '../middleware/findUser.middleware';
+import  { findUser } from '../middleware/user.middleware';
 
 const router = Router();
 

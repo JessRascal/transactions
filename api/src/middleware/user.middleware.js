@@ -1,6 +1,6 @@
 import User from '../models/user.model';
 
-const findUser = async (req, res, next) => {
+export async function findUser(req, res, next) {
   let user;
   try {
     user = await User.findById(req.params.userId);
@@ -13,5 +13,3 @@ const findUser = async (req, res, next) => {
   req.user = user;
   next();
 }
-
-export default findUser;

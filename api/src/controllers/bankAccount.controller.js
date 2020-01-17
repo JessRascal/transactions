@@ -13,19 +13,13 @@ exports.create = async (req, res) => {
 };
 
 // retrieve all bank accounts for a user
-exports.findAll = async (req, res) => {
-  try {
-    const user = req.user;
-    res.json(user.bankAccounts);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+exports.findAll = (req, res) => {
+  res.json(req.bankAccounts);
 };
 
 // retrieve a single bank account for a user
 exports.findOne = (req, res) => {
-  const user = req.user;
-  const account = user.bankAccounts.id(req.params.accountId);
+  const account = req.bankAccounts.id(req.params.accountId);
   if (account == null) {
     return res.status(404).json({ message: `Account does not exist` });
   }
@@ -34,6 +28,7 @@ exports.findOne = (req, res) => {
 
 // update a bank account for a user
 exports.update = async (req, res) => {
+  // TODO: directly update the account instead of getting the user first
   try {
     const user = req.user;
     const accountUpdated = user.bankAccounts.id(req.params.accountId);
@@ -49,6 +44,7 @@ exports.update = async (req, res) => {
 
 // delete a bank account for a user
 exports.delete = async (req, res) => {
+  // TODO: directly just delete the account
   try {
     const user = req.user;
     if (user.bankAccounts.id(req.params.accountId) == null) {
