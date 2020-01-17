@@ -2,15 +2,10 @@ import User from '../models/user.model';
 
 // create new bank account for a user
 exports.create = async (req, res) => {
-  // TODO: just patch in the bank account instead of re-saving the full user object?
   try {
-    const accountNew = await User.findByIdAndUpdate(req.params.userId, { $push: { bankAccounts: req.body } }, { new: true });
-    // const user = req.user;
-    // const accountNew = req.user.bankAccounts.push(req.body);
-    // const userUpdated = await user.bankAccounts.update({ $push: req.body });
-    // const user = req.user;
-    // user.bankAccounts.push(req.body);
-    // const userUpdated = await user.save();
+    const userUpdated = await User.findByIdAndUpdate(req.params.userId, { $push: { bankAccounts: req.body } }, { new: true });
+    // get the last account in the array (the one just added)
+    const accountNew = userUpdated.bankAccounts[userUpdated.bankAccounts.length - 1];
     res.status(201).json(accountNew);
   } catch (err) {
     res.status(500).json(err);
